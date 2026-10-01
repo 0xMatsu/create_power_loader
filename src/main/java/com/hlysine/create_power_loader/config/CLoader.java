@@ -25,7 +25,8 @@ public class CLoader extends ConfigBase {
     public final ConfigBool enableStation;
     public final ConfigInt rangeOnStation = i(2, 1, 10, "rangeOnStation", Comments.rangeOnStation);
 
-    public final ConfigInt randomTickSpeed = i(3, 0, 1024, "randomTickSpeed", Comments.randomTickSpeed);
+    public final ConfigBool ensureRandomTicks = b(true, "ensureRandomTicks", Comments.ensureRandomTicks);
+    public final ConfigInt extraRandomTickSpeed = i(0, 0, 64, "extraRandomTickSpeed", Comments.extraRandomTickSpeed);
 
     private final LoaderType type;
 
@@ -62,6 +63,7 @@ public class CLoader extends ConfigBase {
         static String rangeOnTrain = "Chunk loading radius on trains. 1 = 1 chunk, 2 = 9 chunks";
         static String enableStation = "Whether the chunk loader functions when attached to train stations.";
         static String rangeOnStation = "Chunk loading radius on train stations. 1 = 1 chunk, 2 = 9 chunks";
-        static String randomTickSpeed = "Random ticks per chunk section per game tick performed directly by this chunk loader in the chunks it loads, independent of (and in addition to) any vanilla random ticks. Guarantees crop growth without nearby players. 0 = disabled. Overlapping loaders do not stack; the highest value is used. High values may impact server performance";
+        static String ensureRandomTicks = "Guarantee vanilla-rate random ticks (randomTickSpeed game rule) in chunks loaded by this chunk loader, so crops grow normally without nearby players. Chunks already ticked by vanilla are skipped, so growth is never doubled";
+        static String extraRandomTickSpeed = "Additional random ticks per chunk section per game tick in loaded chunks, on top of vanilla. 0 = disabled (vanilla growth speed). Overlapping loaders do not stack. High values cost server performance";
     }
 }

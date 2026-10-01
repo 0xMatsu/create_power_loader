@@ -1,6 +1,7 @@
 package com.hlysine.create_power_loader;
 
 import com.hlysine.create_power_loader.content.ChunkLoadManager;
+import com.hlysine.create_power_loader.content.RandomTickManager;
 import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
@@ -13,6 +14,7 @@ public class CommonEvents {
     public static void register() {
         CommandRegistrationCallback.EVENT.register(CommonEvents::registerCommands);
         ServerTickEvents.START_WORLD_TICK.register(CommonEvents::onLevelTick);
+        ServerTickEvents.END_WORLD_TICK.register(RandomTickManager::onServerWorldTick);
     }
 
     public static void registerCommands(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext registryAccess, Commands.CommandSelection environment) {
